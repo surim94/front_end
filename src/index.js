@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history'
 import { Router, Route, Switch} from 'react-router-dom'
 import { Provider } from 'react-redux';
+
 import store from 'store';
-
-//application page
 import App from 'App';
-
 import { privateRoutes, publicRoutes } from 'routes';
-import {
-  AuthRoute
-} from 'containers';
+import { AuthRoute } from 'containers';
 
 const history = createBrowserHistory();
 const rootElement = document.getElementById('root');
