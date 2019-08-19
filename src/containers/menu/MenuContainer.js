@@ -1,21 +1,32 @@
 import React from 'react'
 import { MainMenu } from 'components'
+import { withRouter } from 'react-router-dom'
 
 class MenuContainer extends React.Component {
-  state = {
-    activeItem: "home"
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: "home"
+    }
   }
 
   handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
+    // 상태 설정
+    this.setState({ activeItem: name });
+    
+    // 화면이동
+    const clickUrl =  e.currentTarget.getAttribute("data-url");
+    this.props.history.push(clickUrl);
   }
 
   render() {
-    const { activeItem } = this.state
+    const { activeItem } =  this.state;
+    const { handleItemClick } = this;
     return (
-      <MainMenu activeItem={activeItem} onClick={handleItemClick} /> 
+      <MainMenu activeItem={activeItem} handleItemClick={handleItemClick} /> 
     )
   }
 }
 
-export default MenuContainer
+export default withRouter(MenuContainer)

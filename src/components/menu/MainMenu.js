@@ -6,13 +6,14 @@ import {
 } from 'semantic-ui-react'
 import style from 'style/style'
 
-const MainMenu = (activeItem, handleItemClick) => (
+const MainMenu = ({activeItem, handleItemClick}) => (
   <Container style={style.container_mainmenu}>
     <Menu icon='labeled' stackable widths={2}>
       <Menu.Item 
         name='home'
         active={activeItem === 'home'}
-        onClick={handleItemClick}>
+        onClick={handleItemClick}
+        data-url='/'>
         <Icon name='home' />
         HOME
       </Menu.Item>
@@ -20,7 +21,8 @@ const MainMenu = (activeItem, handleItemClick) => (
       <Menu.Item 
         name='list'
         active={activeItem === 'list'}
-        onClick={handleItemClick}>
+        onClick={handleItemClick}
+        data-url='/list'>
         <Icon name='list' />
         LIST
       </Menu.Item>

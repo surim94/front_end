@@ -40,7 +40,6 @@ class App extends React.Component {
             </Grid.Row>
           </Grid>
         </Segment>
-    
       </div>
     )
   }

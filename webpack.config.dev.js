@@ -11,11 +11,19 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),/** bundle.js와 index.html이 저장될 위치 */
         chunkFilename: '[name].[chunkhash].bundle.js',
         filename: '[name].[chunkhash].bundle.js',
+        publicPath: '/'
     },
     devServer: {
         inline: true,
         port: 9999,
         contentBase: __dirname + '/dist/',
+        proxy: {
+          '/': {
+              target: 'http://localhost:3005/', //[수정] 이곳에 Backend 서버 url 입력 하시기 바랍니다.
+              secure: false,
+              changeOrigin: true,
+          }     
+        },
     },
     module: {
       rules: [
