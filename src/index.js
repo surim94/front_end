@@ -8,10 +8,7 @@ import store from 'store';
 import App from 'App';
 import { privateRoutes, publicRoutes } from 'routes';
 import { AuthRoute } from 'containers';
-
-import MainFooter from './components/block/MainFooter';
-import MainHeader from './components/block/MainHeader';
-import MainMenu from './components/menu/MainMenu';
+import { MainHeader, MainFooter, MenuContainer } from 'components';
 
 const history = createBrowserHistory();
 const rootElement = document.getElementById('root');
@@ -40,7 +37,7 @@ ReactDOM.render(
       <BrowserRouter>
         <div className="wrap">
           <MainHeader/>
-          <MainMenu/>
+          <MenuContainer/>
             <Routers  history={history}/>
           <MainFooter/>
         </div>

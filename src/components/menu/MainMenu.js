@@ -6,37 +6,26 @@ import {
 } from 'semantic-ui-react'
 import style from 'style/style'
 
-class MainMenu extends React.Component {
-  state = {}
+const MainMenu = (activeItem, handleItemClick) => (
+  <Container style={style.container_mainmenu}>
+    <Menu icon='labeled' stackable widths={2}>
+      <Menu.Item 
+        name='home'
+        active={activeItem === 'home'}
+        onClick={handleItemClick}>
+        <Icon name='home' />
+        HOME
+      </Menu.Item>
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-
-  render() {
-    const { activeItem } = this.state
-    return (
-      <Container style={style.container_mainmenu}>
-      <Menu icon='labeled' stackable widths={2}>
-        <Menu.Item 
-          name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
-        >
-          <Icon name='home' />
-          HOME
-        </Menu.Item>
-  
-        <Menu.Item 
-          name='list'
-          active={activeItem === 'list'}
-          onClick={this.handleItemClick}
-        >
-          <Icon name='list' />
-          LIST
-        </Menu.Item>
-      </Menu>
-    </Container> 
-    )
-  }
-}
+      <Menu.Item 
+        name='list'
+        active={activeItem === 'list'}
+        onClick={handleItemClick}>
+        <Icon name='list' />
+        LIST
+      </Menu.Item>
+    </Menu>
+  </Container> 
+)
 
 export default MainMenu
