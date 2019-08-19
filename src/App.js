@@ -1,49 +1,49 @@
 import React from 'react'
 import {
+  Button,
   Grid,
   Header,
-  Segment,
-  Image
+  Image,
+  Segment
 } from 'semantic-ui-react'
+import whiteImage from 'public/assets/img/white-image.png';
 
-import { ResponsiveContainer, ConfirmContainer } from 'containers';
-import Footer from 'components/footer/Footer'
-import img from 'public/assets/img/white-image.png';
+class App extends React.Component {
+  render() {
+    return (
+      <div>      
+        <Segment style={{ padding: '8em 0em' }} vertical>
+          <Grid container stackable verticalAlign='middle'>
+            <Grid.Row>
+              <Grid.Column width={8}>
+                <Header as='h3' style={{ fontSize: '2em' }}>
+                  React Template Sample
+                </Header>
+                <p style={{ fontSize: '1.33em' }}>
+                  이 샘플은 Semantic UI를 이용하여 화면을 그리고 리스트를 조회하는 방법을 소개하고 있습니다. 
+                </p>            
+                <Header as='h3' style={{ fontSize: '2em' }}>
+                  Semanti UI (React)
+                </Header>
+                <p style={{ fontSize: '1.33em' }}>
+                  Semantic UI는 React 컴포넌트와 CSS를 제공하여 UI를 쉽게 구현할 수 있도록 도와주는 UI Framework 입니다. 
+                </p>
+              </Grid.Column>
+              <Grid.Column floated='right' width={6}>
+                <Image bordered rounded size='large' src={whiteImage} />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column textAlign='center'>
+                <Button primary size='huge' href='https://react.semantic-ui.com'>Semantic UI 알아보기</Button>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
+    
+      </div>
+    )
+  }
+}
 
-const App = () => (
-  <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Grid container stackable verticalAlign='middle'>
-        <Grid.Row>
-          <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              Semantic UI
-            </Header>
-            <p style={{ fontSize: '1.33em' }}> 
-              Semantic UI는 사용자 친화적인 HTML을 사용하여 아름다운 반응형 레이아웃을 만드는 데 도움이되는 개발 프레임워크입니다. 
-            </p>
-            <a href="https://semantic-ui.com/introduction/getting-started.html" > 
-              공식사이트 바로가기
-            </a>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              React Template
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              React 기반으로 화면을 쉽고 빠르게 개발하기 위해 작성된 Frontend 템플릿 입니다.
-            </p>
-          </Grid.Column>
-          <Grid.Column floated='right' width={6}>
-          <Image bordered rounded size='large' src={img} />
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
-          <Grid.Column textAlign='center'>
-            <ConfirmContainer />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-    <Footer />
-  </ResponsiveContainer>
-)
 export default App

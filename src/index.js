@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history'
-import { Router, Route, Switch} from 'react-router-dom'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
 
 import store from 'store';
@@ -9,13 +9,17 @@ import App from 'App';
 import { privateRoutes, publicRoutes } from 'routes';
 import { AuthRoute } from 'containers';
 
+import MainFooter from './components/block/MainFooter';
+import MainHeader from './components/block/MainHeader';
+import MainMenu from './components/menu/MainMenu';
+
 const history = createBrowserHistory();
 const rootElement = document.getElementById('root');
 
 const Routers = () => (
       <div>
-        <Switch>
-            <Route exact path="/" component={App} />
+        <Route exact path="/" component={App} />
+        <Switch>    
             {
               privateRoutes.map((prop, key) => {
                 return <AuthRoute path={prop.path} component={prop.component} key={key} />;
@@ -33,10 +37,13 @@ const Routers = () => (
 
 ReactDOM.render(
   <Provider store={store}>
-      <Router  history={history}>
+      <BrowserRouter>
         <div className="wrap">
-          <Routers />
+          <MainHeader/>
+          <MainMenu/>
+            <Routers  history={history}/>
+          <MainFooter/>
         </div>
-    </Router>
+    </BrowserRouter>
    </Provider>
   , rootElement);
