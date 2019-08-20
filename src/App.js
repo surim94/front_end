@@ -4,43 +4,64 @@ import {
   Grid,
   Header,
   Image,
-  Segment
+  Segment,
+  Dropdown
 } from 'semantic-ui-react'
 import whiteImage from 'public/assets/img/white-image.png';
+import style from 'style/style'
+
+const stopOptions = [
+  {
+    key: 'Jenny Hess',
+    text: 'Jenny Hess',
+    value: 'Jenny Hess',
+  },
+  {
+    key: 'Elliot Fu',
+    text: 'Elliot Fu',
+    value: 'Elliot Fu',
+  },
+  {
+    key: 'Stevie Feliciano',
+    text: 'Stevie Feliciano',
+    value: 'Stevie Feliciano',
+  },
+  {
+    key: 'Christian',
+    text: 'Christian',
+    value: 'Christian',
+  },
+  {
+    key: 'Matt',
+    text: 'Matt',
+    value: 'Matt',
+  },
+  {
+    key: 'Justen Kitsune',
+    text: 'Justen Kitsune',
+    value: 'Justen Kitsune',
+  },
+]
 
 class App extends React.Component {
   render() {
     return (
-      <div>      
-        <Segment style={{ padding: '8em 0em' }} vertical>
-          <Grid container stackable verticalAlign='middle'>
-            <Grid.Row>
-              <Grid.Column width={8}>
-                <Header as='h3' style={{ fontSize: '2em' }}>
-                  React Template Sample
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  이 샘플은 Semantic UI를 이용하여 화면을 그리고 리스트를 조회하는 방법을 소개하고 있습니다. 
-                </p>            
-                <Header as='h3' style={{ fontSize: '2em' }}>
-                  Semanti UI (React)
-                </Header>
-                <p style={{ fontSize: '1.33em' }}>
-                  Semantic UI는 React 컴포넌트와 CSS를 제공하여 UI를 쉽게 구현할 수 있도록 도와주는 UI Framework 입니다. 
-                </p>
-              </Grid.Column>
-              <Grid.Column floated='right' width={6}>
-                <Image bordered rounded size='large' src={whiteImage} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column textAlign='center'>
-                <Button primary size='huge' href='https://react.semantic-ui.com'>Semantic UI 알아보기</Button>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </Segment>
-      </div>
+
+      <Grid celled='internally' style={{ padding : '20em 0em'}}>
+        <Grid.Row>
+          <Grid.Column width={5}>
+            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> <Button>검색하기</Button> </Grid.Row>
+          </Grid.Column>
+          <Grid.Column width={11}>
+            <Grid.Row style={style.search_grid}>Bus 1</Grid.Row>
+            <Grid.Row style={style.search_grid}>Bus 2</Grid.Row>
+          </Grid.Column>
+        </Grid.Row>
+
+      </Grid>
     )
   }
 }

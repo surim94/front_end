@@ -3,8 +3,8 @@ const style = {
         padding: '5em 0em'
     },
     h1_mainheader: {
-        fontSize: '5em',
-        marginTop: '2em',
+        fontSize: '3em',
+        marginTop: '0.5em',
     },
     h2_mainheader: {
         margin: '1em 0em 2em',
@@ -25,7 +25,10 @@ const style = {
     },
     item_list: {
         paddingTop: '1em'
-    }
+    },
+    search_grid: {
+        margin: '1em 0em 2em',
+    },
 }
 
 export default style

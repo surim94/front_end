@@ -29,7 +29,6 @@ ReactDOM.render(
       <BrowserRouter>
         <div>
           <MainHeader/>
-          <MenuContainer/>
           <Routers history={history}/>
           <MainFooter/>
         </div>
