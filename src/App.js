@@ -57,21 +57,13 @@ class App extends React.Component {
    constructor(props) {
     super(props);
     this.state = {
-      startIdx : 0,
-      endIdx : 0
+
     };
   }
 
    //렌더링 이후 실행되는 함수
   componentDidMount() {
     this.handleGetList();
-  }
-
-   setValues = (e) => {
-      this.setState({
-        startIdx : e.target.getAttribute("seq")
-      });
-      console.log(e.target.value);
   }
 
   // 저장된 정류장 조회
@@ -92,10 +84,8 @@ class App extends React.Component {
             object.key = object.busStaId,
             object.value = object.busStaId,
             object.text = object.busStaNm,
-            object.seq = object.busSeq,
             delete object.busStaId,
-            delete object.busStaNm,
-            delete object.busSeq
+            delete object.busStaNm
           ));
           console.log(response.data);
           ListAction.setList(response.data);
@@ -112,7 +102,7 @@ class App extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={5}>
-            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stoplist}/> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stoplist} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stoplist} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> <Button>검색하기</Button> </Grid.Row>
@@ -136,7 +126,6 @@ class App extends React.Component {
 App.defaultProps = {
   stoplist: stopOptions
 };
-
 
 export default connect(
   (state) => ({
