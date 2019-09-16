@@ -10,16 +10,16 @@ const SampleList = ({list}) => {
     /* .map 사용시 주의사항 가장 parent tag에 unique key가 반드시 들어가야함  */
     return (
         list.map((object ,i) => (
-            <Item key={object.sampleKey}>
+            <Item key={object.busStaId}>
                 <Item.Image src={greyImage} style={style.image_list} />
                 <Item.Content style={style.item_list}>
-                <Item.Header>Content {object.sampleKey}</Item.Header>
+                <Item.Header>Content {object.busStaNm}</Item.Header>
                 <Item.Meta>
                     <span>Sample</span>
                     <span>Data</span>
                 </Item.Meta>
                 <Item.Description>
-                    {object.sampleContents}
+                    {object.busStaId}
                 </Item.Description>
                 </Item.Content>
             </Item>

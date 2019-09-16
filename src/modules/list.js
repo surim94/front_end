@@ -4,7 +4,7 @@ import { Map } from 'immutable';
 /*
  * 액션 타입 정의
  */
-const SET_LIST = 'faq/SET_LIST';
+const SET_LIST = 'stop/SET_LIST';
 
 /*
  * 액션 생성 함수 정의
@@ -23,6 +23,6 @@ export const setList = createAction(SET_LIST);
  */
 export default handleActions({
   [SET_LIST] : (state, action) => {
-    return state.set('list', action.payload)
+    return state.set('stoplist', action.payload)
   }
 }, initialState)
