@@ -71,9 +71,11 @@ class App extends React.Component {
   // 저장된 정류장 조회
   handleGetList = () => {
     const { ListAction } = this.props;
-
+    const { start, end } = this.state;
+    console.log(start)
+    console.log(end)
     axios({
-      url: "/bus",
+      url: "/bus?start="+start+"&end="+end,
       method: "get",
       headers: {"Pragma": 'no-cache'}
     })
@@ -120,7 +122,7 @@ class App extends React.Component {
 
   render() {
     const { stoplist } = this.props;
-    const { handleStart } = this;
+    const { handleStart, handleGetList } = this;
     const { handleEnd } = this;
     const start = this.state.start;
     const end = this.state.end;
@@ -131,7 +133,7 @@ class App extends React.Component {
             <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stoplist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stoplist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
-            <Grid.Row style={style.search_grid}> <Button>검색하기</Button> </Grid.Row>
+            <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> </Grid.Row>
           </Grid.Column>
           <Grid.Column width={11} style={{overflow: 'auto', maxHeight: 1000 }}>
             <Item.Group divided>
