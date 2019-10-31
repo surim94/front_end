@@ -12,7 +12,7 @@ const BusList = ({list}) => {
             <Item.Image size='mini' src={object.key == '13371' ? arrowImageRed : (object.key % 2 ==0 ? arrowImageGreen : arrowImage)} />
     
             <Item.Content verticalAlign='middle'>
-            <Item.Header>{object.text} ({object.value})</Item.Header>
+            <Item.Header>{object.text} ({object.key})</Item.Header>
             </Item.Content>
         </Item> 
              
