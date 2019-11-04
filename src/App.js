@@ -17,40 +17,31 @@ import * as listActions from 'modules/list'
 import { BusList } from 'components'
 
 const stopOptions = [
-  {
-    key: 'Jenny Hess',
-    text: 'Jenny Hess',
-    value: 'Jenny Hess',
-  },
-  {
-    key: 'Elliot Fu',
-    text: 'Elliot Fu',
-    value: 'Elliot Fu',
-  },
-  {
-    key: 'Stevie Feliciano',
-    text: 'Stevie Feliciano',
-    value: 'Stevie Feliciano',
-  },
-  {
-    key: 'Christian',
-    text: 'Christian',
-    value: 'Christian',
-  },
-  {
-    key: 'Matt',
-    text: 'Matt',
-    value: 'Matt',
-  },
-  {
-    key: 'Justen Kitsune',
-    text: 'Justen Kitsune',
-    value: 'Justen Kitsune',
-  },
+  { key: '00', text: '00', value: '00'},
+  { key: '01', text: '01', value: '01'},
+  { key: '02', text: '02', value: '02'},
+  { key: '03', text: '03', value: '03'},
+  { key: '04', text: '04', value: '04'},
+  { key: '05', text: '05', value: '05'},
+  { key: '06', text: '06', value: '06'},
+  { key: '07', text: '07', value: '07'},
+  { key: '08', text: '08', value: '08'},
+  { key: '09', text: '09', value: '09'},
+  { key: '10', text: '10', value: '10'},
+  { key: '11', text: '11', value: '11'},
+  { key: '12', text: '12', value: '12'},
+  { key: '13', text: '13', value: '13'},
+  { key: '14', text: '14', value: '14'},
+  { key: '15', text: '15', value: '15'},
+  { key: '16', text: '16', value: '16'},
+  { key: '17', text: '17', value: '17'},
+  { key: '18', text: '18', value: '18'},
+  { key: '19', text: '19', value: '19'},
+  { key: '20', text: '20', value: '20'},
+  { key: '21', text: '21', value: '21'},
+  { key: '22', text: '22', value: '22'},
+  { key: '23', text: '23', value: '23'}
 ]
-
-//console.log(ListAction);
-//const stopOptions = [{list}]
 
 class App extends React.Component {
    //생성자
@@ -58,7 +49,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       'start' :'',
-      'end'  : ''
+      'end'  : '',
+      'time'  : ''
 
     };
   }
@@ -152,20 +144,28 @@ class App extends React.Component {
     
   }
 
+  handleTime = (e, {value}) => {
+    const time = this.state.time;
+    this.setState({'time' : value});
+    console.log("value : " + value);
+    console.log("time : " + this.state.time);
+  }
+
   render() {
     const { stoplist } = this.props;
     const { stopbuslist } = this.props;
-    const { handleStart, handleGetList } = this;
+    const { handleStart, handleGetList, handleTime } = this;
     const { handleEnd } = this;
     const start = this.state.start;
     const end = this.state.end;
+    const time = this.state.time;
     return (
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={5}>
             <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
-            <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} onChange = {handleTime} value={time}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> </Grid.Row>
           </Grid.Column>
           <Grid.Column width={11} style={{overflow: 'auto', maxHeight: 1000 }}>
@@ -191,7 +191,7 @@ App.defaultProps = {
 export default connect(
   (state) => ({
       stoplist: state.list.get('stoplist'),
-    stopbuslist: state.list.get('stopbuslist')
+      stopbuslist: state.list.get('stopbuslist')
   })
   , (dispatch) => ({
       ListAction : bindActionCreators(listActions, dispatch)
