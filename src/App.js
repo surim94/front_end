@@ -57,7 +57,7 @@ class App extends React.Component {
    constructor(props) {
     super(props);
     this.state = {
-      'start' : '',
+      'start' :'',
       'end'  : ''
 
     };
@@ -65,6 +65,7 @@ class App extends React.Component {
 
    //렌더링 이후 실행되는 함수
   componentDidMount() {
+    this.handleGetBusList();
     this.handleGetList();
   }
 
@@ -72,7 +73,7 @@ class App extends React.Component {
   handleGetList = () => {
     const { ListAction } = this.props;
     const { start, end } = this.state;
-    console.log(start)
+    console.log('1 :' + start)
     console.log(end)
     axios({
       url: "/bus?start="+start+"&end="+end,
@@ -100,6 +101,37 @@ class App extends React.Component {
       console.log(error.response);
     });
   }
+  
+    // 저장된 정류장 조회
+    handleGetBusList = () => {
+    const { ListAction } = this.props;
+    const { start, end } = this.state;
+      axios({
+        url: "/bus?start="+start+"&end="+end,
+        method: "get",
+        headers: {"Pragma": 'no-cache'}
+      })
+      .then( (response) => {
+        if (response == null){
+            console.log('response is null!');
+        }else {
+            //조회한 데이터 store에 셋팅
+            response.data.map((object ,i) => (
+              object.key = object.busStaId,
+              object.value = object.busSeq,
+              object.text = object.busStaNm,
+              delete object.busSeq,
+              delete object.busStaId,
+              delete object.busStaNm
+            ));
+            console.log(response.data);
+            ListAction.setBusList(response.data);
+            
+        }
+      }).catch(function(error) {
+        console.log(error.response);
+      });
+    }
 
   handleStart = (e, {value}) => {
     const end = this.state.end;
@@ -122,6 +154,7 @@ class App extends React.Component {
 
   render() {
     const { stoplist } = this.props;
+    const { stopbuslist } = this.props;
     const { handleStart, handleGetList } = this;
     const { handleEnd } = this;
     const start = this.state.start;
@@ -130,8 +163,8 @@ class App extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={5}>
-            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stoplist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
-            <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stoplist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> </Grid.Row>
           </Grid.Column>
@@ -158,6 +191,7 @@ App.defaultProps = {
 export default connect(
   (state) => ({
       stoplist: state.list.get('stoplist'),
+    stopbuslist: state.list.get('stopbuslist')
   })
   , (dispatch) => ({
       ListAction : bindActionCreators(listActions, dispatch)
