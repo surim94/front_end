@@ -70,7 +70,7 @@ class App extends React.Component {
     console.log("selectedTime : " + selectedTime)
 
     axios({
-      url: "/bus?start="+start+"&end="+end+"&time="+time+"&selectedTime="+selectedTime,
+      url: process.env.API_URL + "/bus?start="+start+"&end="+end+"&time="+time+"&selectedTime="+selectedTime,
       method: "get",
       headers: {"Pragma": 'no-cache'}
     })
@@ -101,7 +101,7 @@ class App extends React.Component {
     const { ListAction } = this.props;
     const { start, end } = this.state;
       axios({
-        url: "/bus?start="+start+"&end="+end,
+        url: process.env.API_URL + "/bus?start="+start+"&end="+end,
         method: "get",
         headers: {"Pragma": 'no-cache'}
       })
