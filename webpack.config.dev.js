@@ -1,6 +1,7 @@
 const path = require('path');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: "development",
@@ -74,6 +75,7 @@ module.exports = {
             inject: true, //true or body로 설정하면 body 태그의 맨 마지막에 bundle.js import
             filename: path.join(__dirname, './dist/index.html')
         }),
+        new webpack.DefinePlugin({ 'process.env.API_URL': JSON.stringify('') }),
         new ManifestPlugin({
           fileName: 'assets.json',
           basePath: '/'

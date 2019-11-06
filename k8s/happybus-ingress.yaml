@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: happybus-ingress
+  namespace: submodule-template  
+  annotations:
+    ingress.bluemix.net/rewrite-path: "serviceName=happybus-node-service rewrite=/"
+spec:
+  rules:
+  - host: happybus.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: happybus-service
+          servicePort: 80
+      - path: /api/
+        backend:
+          serviceName: happybus-node-service
+          servicePort: 3005          
