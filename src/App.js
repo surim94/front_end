@@ -64,11 +64,14 @@ class App extends React.Component {
   // 저장된 정류장 조회
   handleGetList = () => {
     const { ListAction } = this.props;
-    const { start, end } = this.state;
+    const { start, end, time } = this.state;
+    const selectedTime = '';
     console.log('1 :' + start)
     console.log(end)
+    selectedTime = selectTime(time);
+
     axios({
-      url: "/bus?start="+start+"&end="+end,
+      url: "/bus?start="+start+"&end="+end+"&time="+time+"&selectedTime="+selectedTime,
       method: "get",
       headers: {"Pragma": 'no-cache'}
     })
@@ -145,10 +148,63 @@ class App extends React.Component {
   }
 
   handleTime = (e, {value}) => {
-    const time = this.state.time;
     this.setState({'time' : value});
-    console.log("value : " + value);
-    console.log("time : " + this.state.time);
+  }
+
+  selectTime = () => {
+    const time = this.state.time;
+    switch(time) {
+      case '00':
+        return 'midnight';
+      case '01':
+        return 'one';
+      case '02':
+        return 'two';
+      case '03':
+        return 'three';
+      case '04':
+        return 'four';
+      case '05':
+        return 'five';
+      case '06':
+        return 'six';
+      case '07':
+        return 'seven';
+      case '08':
+        return 'eight';
+      case '09':
+        return 'nine';
+      case '10':
+        return 'ten';
+      case '11':
+        return 'eleven';
+      case '12':
+        return 'twelve';
+      case '13':
+        return 'thirteen';
+      case '14':
+        return 'fourteen';
+      case '15':
+        return 'fifteen';
+      case '16':
+        return 'sixteen';
+      case '17':
+        return 'seventeen';
+      case '18':
+        return 'eighteen';
+      case '19':
+        return 'nineteen';
+      case '20':
+        return 'twenty';
+      case '21':
+        return 'twenty_one';
+      case '22':
+        return 'twenty_two';
+      case '23':
+        return 'twenty_three';
+      default:
+        return '';
+    }
   }
 
   render() {
