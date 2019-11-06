@@ -65,10 +65,9 @@ class App extends React.Component {
   handleGetList = () => {
     const { ListAction } = this.props;
     const { start, end, time } = this.state;
-    const selectedTime = '';
-    console.log('1 :' + start)
-    console.log(end)
-    selectedTime = selectTime(time);
+    let selectedTime = '';
+    selectedTime = this.selectTime(time);
+    console.log("selectedTime : " + selectedTime)
 
     axios({
       url: "/bus?start="+start+"&end="+end+"&time="+time+"&selectedTime="+selectedTime,
