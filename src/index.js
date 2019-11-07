@@ -30,7 +30,6 @@ ReactDOM.render(
         <div>
           <MainHeader/>
           <Routers history={history}/>
-          <MainFooter/>
         </div>
     </BrowserRouter>
    </Provider>

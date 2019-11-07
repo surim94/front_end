@@ -17,10 +17,8 @@ import * as listActions from 'modules/list'
 import { BusList } from 'components'
 
 const stopOptions = [
-  { key: '00', text: '00', value: '00'},
-  { key: '01', text: '01', value: '01'},
-  { key: '02', text: '02', value: '02'},
-  { key: '03', text: '03', value: '03'},
+//  { key: '02', text: '02', value: '02'},
+//  { key: '03', text: '03', value: '03'},
   { key: '04', text: '04', value: '04'},
   { key: '05', text: '05', value: '05'},
   { key: '06', text: '06', value: '06'},
@@ -40,7 +38,9 @@ const stopOptions = [
   { key: '20', text: '20', value: '20'},
   { key: '21', text: '21', value: '21'},
   { key: '22', text: '22', value: '22'},
-  { key: '23', text: '23', value: '23'}
+  { key: '23', text: '23', value: '23'},
+  { key: '00', text: '00', value: '00'},
+  { key: '01', text: '01', value: '01'}
 ]
 
 class App extends React.Component {
@@ -79,10 +79,12 @@ class App extends React.Component {
           console.log('response is null!');
       }else {
           //조회한 데이터 store에 셋팅
+          
           response.data.map((object ,i) => (
             object.key = object.busStaId,
             object.value = object.busSeq,
             object.text = object.busStaNm,
+            object.url = object.bus_complexity.complexity,
             delete object.busSeq,
             delete object.busStaId,
             delete object.busStaNm
@@ -118,7 +120,7 @@ class App extends React.Component {
               delete object.busStaId,
               delete object.busStaNm
             ));
-            console.log(response.data);
+           // console.log(response.data);
             ListAction.setBusList(response.data);
             
         }
@@ -144,6 +146,12 @@ class App extends React.Component {
       alert("도착지가 출발지와 같거나 이전일 수 없습니다.")
     }
     
+  }
+
+  reset = (e) => {
+    this.setState({'start' : ''});
+    this.setState({'end' : ''});
+    this.setState({'time' : ''});
   }
 
   handleTime = (e, {value}) => {
@@ -196,11 +204,11 @@ class App extends React.Component {
       case '20':
         return 'twenty';
       case '21':
-        return 'twenty_one';
+        return 'twentyOne';
       case '22':
-        return 'twenty_two';
+        return 'twentyTwo';
       case '23':
-        return 'twenty_three';
+        return 'twentyThree';
       default:
         return '';
     }
@@ -209,7 +217,7 @@ class App extends React.Component {
   render() {
     const { stoplist } = this.props;
     const { stopbuslist } = this.props;
-    const { handleStart, handleGetList, handleTime } = this;
+    const { handleStart, handleGetList, handleTime, reset } = this;
     const { handleEnd } = this;
     const start = this.state.start;
     const end = this.state.end;
@@ -217,11 +225,12 @@ class App extends React.Component {
     return (
       <Grid celled='internally'>
         <Grid.Row>
-          <Grid.Column width={5}>
+          <Grid.Column width={5} style={{textAlign : "center"}}>
             <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} onChange = {handleTime} value={time}/> <br /></Grid.Row>
-            <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> </Grid.Row>
+            <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> <Button onClick={reset}>초기화</Button> </Grid.Row>
+           
           </Grid.Column>
           <Grid.Column width={11} style={{overflow: 'auto', maxHeight: 1000 }}>
             <Item.Group divided>
