@@ -12,7 +12,7 @@ const BusList = ({list}) => {
     return (
       list.map((object ,i) => (
          <Item key={object.key}>
-            <Item.Image size='mini' src={object.url == '10' ? arrowImageGreen : (object.url == '20' ? arrowImageYellow : arrowImageRed2)} />
+            <Item.Image size='mini' src={object.url == '10' ? arrowImageRed2 : (object.url == '20' ? arrowImageYellow : arrowImageGreen)} />
             <Item.Content verticalAlign='middle'>
             <Item.Header>{object.text} ({object.key})</Item.Header>
             </Item.Content>

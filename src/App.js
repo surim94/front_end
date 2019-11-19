@@ -226,7 +226,7 @@ class App extends React.Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={5} style={{textAlign : "center"}}>
-            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
+            <Grid.Row style={style.search_grid}> 출발지 <Dropdown placeholder='Select'search selection options={stopbuslist} onChange = {handleStart} value={start}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 도착지 <Dropdown placeholder='Select' search selection options={stopbuslist} onChange = {handleEnd} value={end} /> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> 시간대 <Dropdown placeholder='Select' search selection options={stopOptions} onChange = {handleTime} value={time}/> <br /></Grid.Row>
             <Grid.Row style={style.search_grid}> <Button onClick={handleGetList}>검색하기</Button> <Button onClick={reset}>초기화</Button> </Grid.Row>
